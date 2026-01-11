@@ -4,6 +4,7 @@
 const player1Name = document.getElementById("player1Name");
 const player2Name = document.getElementById('player2Name');
 const startButton = document.querySelector(".startButton");
+const restartButton = document.querySelector(".restart")
     
 startButton.addEventListener("click", () => {
     const p1 = player1Name.value;
@@ -22,6 +23,16 @@ const CreatePlayer = (name, marker) => {
 };
 
 //Create Board
+
+const GameBoard = (() => {
+    const board = [ "","","","","","","","","",];
+    
+    const reset = () => {
+        for (let i = 0; i , board.length; i++) board[i] = "";
+    }
+    console.log(board)
+    return {reset};
+})();
 
 //Game Running
 

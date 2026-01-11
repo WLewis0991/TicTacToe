@@ -33,12 +33,19 @@ const CreatePlayer = (name, marker) => {
 
 const GameBoard = (() => {
     const board = [ "","","","","","","","",""];
+
+    const markCell = (index, currentMarker) => {
+        if (board[index] === ""){
+            board[index] = currentMarker;
+            return true;
+        }
+        return false;
+    }
     
     const reset = () => {
         for (let i = 0; i , board.length; i++) board[i] = "";
     }
-    console.log(board)
-    return {reset};
+    return {reset, markCell,board};
 })();
 
 //Game Running
@@ -64,8 +71,13 @@ const Game = (() => {
 
     const playTurn = (i) => {
         const currentMarker = currentPlayer().getMarker();
+        if (GameBoard.markCell(i, currentMarker)){
+        currentPlayerIndex = 1 - currentPlayerIndex
+        }
         console.log(i);
         console.log(currentMarker);
+        console.log(GameBoard.board)
+        
 
     }
 

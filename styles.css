@@ -48,6 +48,10 @@ input{
     font-size: 1em;
 }
 
+#inputError{
+    font-size: 1.5em;
+}
+
 button {
     font-size: 1.5em;
     padding: 5px 20px;

@@ -57,6 +57,7 @@ button {
     padding: 5px 20px;
     border: none;
     border-radius: 10px;
+    color: black;
     background-color: rgba(0, 0, 0, 0);
     box-shadow:  10px 10px 40px 10px rgba(0, 0, 0, 0.395);;
 }

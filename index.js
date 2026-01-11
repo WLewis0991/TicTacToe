@@ -16,7 +16,7 @@ startButton.addEventListener("click", () => {
     const cells = document.querySelectorAll(".cell")
     cells.forEach((cell, i) => {
         cell.addEventListener("click", () => {
-            console.log("Working");
+            console.log(`Working at ${i}`);
         })
     }
 )});

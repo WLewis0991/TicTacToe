@@ -5,7 +5,9 @@ const player1Name = document.getElementById("player1Name");
 const player2Name = document.getElementById('player2Name');
 const startButton = document.querySelector(".startButton");
 const cells = document.querySelectorAll (".cell")
-const restartButton = document.querySelector(".restart")
+const restartButton = document.querySelector(".restart");
+const inputs = document.querySelectorAll ("input");
+const inputError = document.querySelector (".inputError")
     
 startButton.addEventListener("click", () => {
 
@@ -13,6 +15,7 @@ startButton.addEventListener("click", () => {
     document.querySelector(".gameBoardContainer").classList.remove("hidden");
     const p1 = player1Name.value;
     const p2 = player2Name.value;
+
     Game.start(p1, p2);
     cells.forEach((cell, i) => {
         cell.addEventListener("click", () => {

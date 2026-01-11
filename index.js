@@ -115,6 +115,7 @@ const Game = (() => {
     }
     restartButton.addEventListener("click", () =>{
         cells.textContent="";
+        updateStatus(`${currentPlayer().getName()}'s turn!`)
         GameBoard.reset();
         Game.render();
         gameOver=false

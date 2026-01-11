@@ -22,6 +22,8 @@ startButton.addEventListener("click", () => {
 
     console.log(GameBoard.board)
     });
+
+
 //Create Player
 
 const CreatePlayer = (name, marker) => {
@@ -47,9 +49,9 @@ const GameBoard = (() => {
     const getBoard = () => [...board];
 
     const reset = () => {
-        for (let i = 0; i , board.length; i++) board[i] = "";
+        for (let i = 0; i < board.length; i++) board[i] = "";
     }
-    return {reset, markCell, getBoard, board};
+    return {reset, markCell, getBoard};
 })();
 
 //Game Running
@@ -80,10 +82,14 @@ const Game = (() => {
         const marker = currentPlayer().getMarker();
 
         if (GameBoard.markCell(i, marker)) {
+            if (checkWin(marker)) {
+            gameOver = true;
+            updateStatus(`${currentPlayer().getName()} WINS!!`);
+            } else {
             currentPlayerIndex = 1 - currentPlayerIndex;
             updateStatus(`${currentPlayer().getName()}'s turn!`);
+            }
             render();
-            console.log(GameBoard.board)
         }
     };
 
@@ -94,8 +100,22 @@ const Game = (() => {
         });
     };
 
-    return { start, currentPlayer, updateStatus, playTurn, render };
+    const checkWin = (marker) => {
+        const b = GameBoard.getBoard();
+        const winPatterns = [
+        [0,1,2],[3,4,5],[6,7,8],
+        [0,3,6],[1,4,7],[2,5,8],
+        [0,4,8],[2,4,6]
+        ];
+        return winPatterns.some(pattern => pattern.every(i => b[i] === marker));
+    }
+    restartButton.addEventListener("click", () =>{
+        cells.textContent="";
+        GameBoard.reset();
+        Game.render();
+        gameOver=false
+})
+    
+
+    return { start, currentPlayer, updateStatus, playTurn, render, checkWin };
 })();
-
-
-//Win Checks

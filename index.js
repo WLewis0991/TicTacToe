@@ -29,18 +29,22 @@ const Game = (() => {
     let players=[];
     let currentPlayerIndex = 0;
     let gameOver = false;
-
-
+    const status = document.querySelector(".statusScreen") 
 
     const start = (p1, p2) => {
         players = [CreatePlayer(p1, "X"), CreatePlayer(p2, "O")]; 
         currentPlayerIndex = 0;
         gameOver = false;
+        Game.updateStatus(`${currentPlayer().getName()}'s turn!`);
         console.log(players[1].getMarker())  
         console.log(players[1].getName())     
     };
 
-    return {start};  
+    const currentPlayer = () => players[currentPlayerIndex];
+
+    const updateStatus = (message) => status.textContent = message
+
+    return {start, currentPlayer, updateStatus};  
     
     
 })();

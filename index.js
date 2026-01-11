@@ -16,7 +16,7 @@ startButton.addEventListener("click", () => {
     const cells = document.querySelectorAll(".cell")
     cells.forEach((cell, i) => {
         cell.addEventListener("click", () => {
-            console.log(`Working at ${i}`);
+            Game.playTurn(i);
         })
     }
 )});
@@ -62,7 +62,14 @@ const Game = (() => {
 
     const updateStatus = (message) => status.textContent = message
 
-    return {start, currentPlayer, updateStatus};  
+    const playTurn = (i) => {
+        const currentMarker = currentPlayer().getMarker();
+        console.log(i);
+        console.log(currentMarker);
+
+    }
+
+    return {start, currentPlayer, updateStatus, playTurn};  
     
     
 })();

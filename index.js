@@ -89,6 +89,9 @@ const Game = (() => {
             if (checkWin(marker)) {
             gameOver = true;
             updateStatus(`${currentPlayer().getName()} WINS!!`);
+            } else if (checkTie()){
+            gameOver = true;
+            updateStatus("It's a tie!");
             } else {
             currentPlayerIndex = 1 - currentPlayerIndex;
             updateStatus(`${currentPlayer().getName()}'s turn!`);
@@ -113,6 +116,11 @@ const Game = (() => {
         ];
         return winPatterns.some(pattern => pattern.every(i => b[i] === marker));
     }
+
+    const checkTie = () => {
+        return GameBoard.getBoard().every(cell => cell !== "");
+    };
+
     restartButton.addEventListener("click", () =>{
         cells.textContent="";
         updateStatus(`${currentPlayer().getName()}'s turn!`)
@@ -122,5 +130,5 @@ const Game = (() => {
 })
     
 
-    return { start, currentPlayer, updateStatus, playTurn, render, checkWin };
+    return { start, currentPlayer, updateStatus, playTurn, render, checkWin, checkTie };
 })();

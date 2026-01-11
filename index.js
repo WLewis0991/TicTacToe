@@ -4,6 +4,7 @@
 const player1Name = document.getElementById("player1Name");
 const player2Name = document.getElementById('player2Name');
 const startButton = document.querySelector(".startButton");
+const cells = document.querySelectorAll (".cell")
 const restartButton = document.querySelector(".restart")
     
 startButton.addEventListener("click", () => {
@@ -13,7 +14,6 @@ startButton.addEventListener("click", () => {
     document.querySelector(".startContainer").classList.add("hidden");
     document.querySelector(".gameBoardContainer").classList.remove("hidden");
     
-    const cells = document.querySelectorAll(".cell")
     cells.forEach((cell, i) => {
         cell.addEventListener("click", () => {
             Game.playTurn(i);
@@ -39,13 +39,16 @@ const GameBoard = (() => {
             board[index] = currentMarker;
             return true;
         }
-        return false;
+        else
+            return false;
     }
     
+    const getBoard = () => [...board];
+
     const reset = () => {
         for (let i = 0; i , board.length; i++) board[i] = "";
     }
-    return {reset, markCell,board};
+    return {reset, markCell, getBoard, board};
 })();
 
 //Game Running
@@ -72,16 +75,30 @@ const Game = (() => {
     const playTurn = (i) => {
         const currentMarker = currentPlayer().getMarker();
         if (GameBoard.markCell(i, currentMarker)){
-        currentPlayerIndex = 1 - currentPlayerIndex
+        currentPlayerIndex = 1 - currentPlayerIndex;
         }
+
+        Game.render();
         console.log(i);
         console.log(currentMarker);
-        console.log(GameBoard.board)
-        
+        console.log(GameBoard.board)    
+    }
+
+    const render = () => {
+        const board = GameBoard.getBoard();
+        cells.forEach((cells, i) =>{
+            const marker = board[i];
+            cells.textContent = marker
+        })
 
     }
 
-    return {start, currentPlayer, updateStatus, playTurn};  
+    
+
+    
+    
+
+    return {start, currentPlayer, updateStatus, playTurn, render};  
     
     
 })();

@@ -12,7 +12,14 @@ startButton.addEventListener("click", () => {
     Game.start (p1, p2);
     document.querySelector(".startContainer").classList.add("hidden");
     document.querySelector(".gameBoardContainer").classList.remove("hidden");
-});
+    
+    const cells = document.querySelectorAll(".cell")
+    cells.forEach((cell, i) => {
+        cell.addEventListener("click", () => {
+            console.log("Working");
+        })
+    }
+)});
     
 //Create Player
 
@@ -25,7 +32,7 @@ const CreatePlayer = (name, marker) => {
 //Create Board
 
 const GameBoard = (() => {
-    const board = [ "","","","","","","","","",];
+    const board = [ "","","","","","","","",""];
     
     const reset = () => {
         for (let i = 0; i , board.length; i++) board[i] = "";
@@ -40,7 +47,7 @@ const Game = (() => {
     let players=[];
     let currentPlayerIndex = 0;
     let gameOver = false;
-    const status = document.querySelector(".statusScreen") 
+    const status = document.querySelector(".statusScreen");
 
     const start = (p1, p2) => {
         players = [CreatePlayer(p1, "X"), CreatePlayer(p2, "O")]; 

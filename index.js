@@ -27,7 +27,6 @@ startButton.addEventListener("click", () => {
     console.log(GameBoard.board)
     });
 
-
 //Create Player
 
 const CreatePlayer = (name, marker) => {
@@ -44,12 +43,13 @@ const GameBoard = (() => {
     const markCell = (index, currentMarker) => {
         if (board[index] === ""){
             board[index] = currentMarker;
+            console.log(board)
             return true;
         }
         else
             return false;
     }
-    
+        
     const getBoard = () => [...board];
 
     const reset = () => {
@@ -89,9 +89,11 @@ const Game = (() => {
             if (checkWin(marker)) {
             gameOver = true;
             updateStatus(`${currentPlayer().getName()} WINS!!`);
+            console.log(`${currentPlayer().getName()} WINS!!`);
             } else if (checkTie()){
             gameOver = true;
             updateStatus("It's a tie!");
+            console.log("Tie Game!")
             } else {
             currentPlayerIndex = 1 - currentPlayerIndex;
             updateStatus(`${currentPlayer().getName()}'s turn!`);
@@ -121,6 +123,8 @@ const Game = (() => {
         return GameBoard.getBoard().every(cell => cell !== "");
     };
 
+//Restart Function
+
     restartButton.addEventListener("click", () =>{
         cells.textContent="";
         updateStatus(`${currentPlayer().getName()}'s turn!`)
@@ -128,7 +132,5 @@ const Game = (() => {
         Game.render();
         gameOver=false
 })
-    
-
     return { start, currentPlayer, updateStatus, playTurn, render, checkWin, checkTie };
 })();
